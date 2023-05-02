@@ -75,4 +75,25 @@ class Main{
         for (int i = 0; i < arabian.length; i++ ) {
             while (romanInput.indexOf(roman[i]) == 0) {
                 result += arabian[i];
-                romanInput = romanInput.substring(roman[i].length());}
+                romanInput = romanInput.substring(roman[i].length());
+            }
+        }
+
+        return result;
+    }
+
+    String arabianToRome(int arabianInput){                                  // перевод арабские в римские
+        String result = "";
+        int value = 0;
+        int[] arabian = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] roman = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        for (int i = 0; i < arabian.length; i++){
+            value = arabianInput / arabian[i];
+            for (int z = 0; z < value; z++){
+                result = result.concat(roman[i]);
+            }
+            arabianInput = arabianInput % arabian[i];
+        }
+        return result;
+    }
+}
