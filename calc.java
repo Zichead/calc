@@ -1,7 +1,8 @@
+
 import java.util.Scanner;
 
- class Calculator{
-    public static void main(String[] args){
+ class Calculator {
+    public static void main(String[] args) throws ThrowExeption {
         Scanner sc = new Scanner(System.in);
         Main result = new Main();
         System.out.print("Введите выражение: ");
@@ -13,16 +14,17 @@ import java.util.Scanner;
 }
 
 class Main{
-    public static String calc(String input){
+    public static String calc(String input) throws ThrowExeption {
         boolean romanOrArabian = false;
-        String exception = "throws Exception";
         Main romanExamination = new Main();
         Main arabianToRoman = new Main();
         int result = 0;
         String[] inputSplit = input.split(" ");
-        if (inputSplit.length != 3){                    // 3 элемента
-            return exception;
+
+        if (inputSplit.length != 3) {
+            throw new ThrowExeption();
         }
+
         Integer firstNumber = 0;
         Integer secondNumber = 0;
         try {
@@ -34,12 +36,12 @@ class Main{
                 secondNumber = romanExamination.romanToArabian(inputSplit[2]);
                 romanOrArabian = true;
             } catch (NumberFormatException ex) {                     // римские
-                return exception;
+                throw new ThrowExeption();
             }
         }
 
         if ((firstNumber < 1) || (firstNumber > 10) || (secondNumber < 1) || (secondNumber > 10)){
-            return exception;
+            throw new ThrowExeption();
         }
 
         String sign = inputSplit[1];
@@ -49,7 +51,7 @@ class Main{
             case "*" -> result = firstNumber * secondNumber;
             case "/" -> result = firstNumber / secondNumber;
             default -> {
-                return exception;                                    // проверка на знак
+                throw new ThrowExeption();                                    // проверка на знак
             }
         }
 
@@ -57,7 +59,7 @@ class Main{
 
         if (romanOrArabian){
             if(result < 1){
-                return exception;
+                throw new ThrowExeption();
             } else {
                 output = arabianToRoman.arabianToRome(result);
             }
